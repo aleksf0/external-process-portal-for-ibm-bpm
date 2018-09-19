@@ -1,0 +1,106 @@
+$image-sprite-path: '../../../../images/portal_sprite.png';
+
+@mixin task-status-icon($sprite, $left, $top) {
+  width: 30px;
+  height: 30px;
+  padding-right: 30px;
+  margin-right: 5px;
+  background: url($sprite) $left $top;
+}
+
+@mixin task-priority-icon($sprite, $left, $top) {
+  width: 12px;
+  height: 50px;
+  padding-right: 10px;
+  float: right;
+  background: url($sprite) $left $top;
+}
+
+.task {
+
+  @at-root #{&} .panel-body {
+    padding: 0px 0px 0px 5px;
+    background: linear-gradient(to bottom right, #DADEE4, #F6F7F9);
+    @at-root #{&}:hover {
+      background: linear-gradient(to bottom right, #DADEFF, #F6F7F9);
+    }
+  }
+
+  @at-root #{&} .btn-group {
+    margin-left: 10px;
+  }
+
+  @at-root #{&}__subject-link {
+    color: #003f6b;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  @at-root #{&}__process-instance-name {
+    font-size: 10px;
+    font-style: italic;
+    padding-left: 35px;
+  }
+
+  @at-root #{&}__details-container {
+    font-size: 10px;
+    text-align: right;
+    padding: 0px 0px 0px 0px !important; /* The Bootstrap Col element has padding defined inline, therefore !important is the only option to override it. */
+  }
+  @at-root #{&}__date-actor-container {
+    float: left;
+    width: 93%;
+    padding-top: 10px;
+  }
+  @at-root #{&}__priority-container {
+    float: right;
+  }
+
+  @at-root #{&}__date-prefix {
+    font-weight: bold;
+  }
+
+  @at-root #{&}__actor {
+    font-style: italic;
+    @at-root #{&}-icon {
+      height: 16px;
+      width: 0px;
+      padding-left: 16px;
+      padding-right: 5px;
+      background: url($image-sprite-path) -60px -90px no-repeat;
+    }
+  }
+
+  @at-root #{&}__status-icon {
+    @at-root #{&}--overdue {
+      @include task-status-icon($image-sprite-path, 0px, -60px);
+    }
+    @at-root #{&}--at-risk {
+      @include task-status-icon($image-sprite-path, -30px, -60px);
+    }
+    @at-root #{&}--on-track {
+      @include task-status-icon('../../../../images/task_state.png', -4px, -68px);
+    }
+    @at-root #{&}--completed {
+      @include task-status-icon($image-sprite-path, -60px, -60px);
+    }
+  }
+
+  @at-root #{&}__priority-icon {
+    @at-root #{&}--highest {
+      @include task-priority-icon($image-sprite-path, 0px, 0px);
+    }
+    @at-root #{&}--high {
+      @include task-priority-icon($image-sprite-path, -14px, 0px);
+    }
+    @at-root #{&}--normal {
+      @include task-priority-icon($image-sprite-path, -28px, 0px);
+    }
+    @at-root #{&}--low {
+      @include task-priority-icon($image-sprite-path, -42px, 0px);
+    }
+    @at-root #{&}--lowest {
+      @include task-priority-icon($image-sprite-path, -56px, 0px);
+    }
+  }
+}

@@ -1,0 +1,41 @@
+$image-sprite-path: '../../../../images/portal_sprite_2.png';
+
+@mixin tab-icon($sprite, $left, $top) {
+  height: 20px;
+  width: 20px;
+  padding-left: 20px;
+  margin-right: 5px;
+  background: url($sprite) $left $top no-repeat;
+}
+
+.bpm-portal-page-header {
+
+  padding-top: 15px;
+
+  @at-root #{&}__logo {
+    @at-root #{&}-container {
+      width: 600px;
+      text-align: right;
+      vertical-align: middle;
+      float: right;
+    }
+    @at-root #{&}-image {
+      margin-left: 10px;
+      width: 250px;
+      height: 50px;
+    }
+  }
+
+  @at-root #{&}__icon {
+    @at-root #{&}--tasks {
+      @include tab-icon($image-sprite-path, -100px, 3px);
+    }
+    @at-root #{&}--process-instances {
+      @include tab-icon($image-sprite-path, -100px, -37px);
+    }
+  }
+
+  @at-root #{&}__link-group {
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,10 @@
+.show-more-items {
+
+  font-size: 12px;
+  font-weight: bold;
+  padding-bottom: 20px;
+
+  @at-root #{&} #{&}__button {
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,19 @@
+.action-picker {
+
+  padding-bottom: 15px;
+
+  @at-root #{&}__link {
+    @at-root #{&}--selected {
+      font-weight: bold;
+    }
+    @at-root #{&}--idle {
+      font-weight: normal;
+    }
+    @at-root #{&}--enabled {
+      cursor: pointer;
+    }
+    @at-root #{&}--disabled {
+      cursor: not-allowed;
+    }
+  }
+}

@@ -1,0 +1,92 @@
+$image-sprite-path: '../../../images/dashboard_sprite.png';
+
+@mixin activity-icon($sprite, $left, $top) {
+  background: url($sprite) $left $top no-repeat;
+}
+
+.activities {
+  @at-root #{&}__action-picker {
+    text-align: center;
+  }
+}
+
+.activity {
+
+  @at-root #{&}.btn-link {
+    padding: 0px;
+    width: 100%;
+    text-align: left;
+    @at-root #{&}:hover {
+      background-color: #e7f0f6;
+      text-decoration: none;
+    }
+  }
+
+  @at-root #{&}__name {
+    padding-left: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #003f6b;
+  }
+
+  @at-root #{&}__icon {
+
+    @at-root #{&}-placeholder {
+      height: 25px;
+      width: 0px;
+      padding-left: 25px;
+      margin-bottom: 1px;
+    }
+
+    @at-root #{&}-wrapper {
+      @at-root #{&}--ready-required img {
+        @include activity-icon($image-sprite-path, -4px, -5523px);
+      }
+      @at-root #{&}--ready-required:hover img {
+        @include activity-icon($image-sprite-path, -4px, -4006px);
+      }
+      @at-root #{&}--ready-optional img {
+        @include activity-icon($image-sprite-path, -4px, -7793px);
+      }
+      @at-root #{&}--ready-optional:hover img {
+        @include activity-icon($image-sprite-path, -4px, -5700px);
+      }
+      @at-root #{&}--waiting-required img {
+        @include activity-icon($image-sprite-path, -4px, -7495px);
+      }
+      @at-root #{&}--waiting-required:hover img {
+        @include activity-icon($image-sprite-path, -4px, -1638px);
+      }
+      @at-root #{&}--waiting-optional img {
+        @include activity-icon($image-sprite-path, -4px, -4655px);
+      }
+      @at-root #{&}--waiting-optional:hover img {
+        @include activity-icon($image-sprite-path, -4px, -4426px);
+      }
+      @at-root #{&}--working img {
+        @include activity-icon($image-sprite-path, -4px, -7846px);
+      }
+      @at-root #{&}--working:hover img {
+        @include activity-icon($image-sprite-path, -4px, -2156px);
+      }
+      @at-root #{&}--completed img {
+        @include activity-icon($image-sprite-path, -4px, -4836px);
+      }
+      @at-root #{&}--completed:hover img {
+        @include activity-icon($image-sprite-path, -4px, -2001px);
+      }
+      @at-root #{&}--failed img {
+        @include activity-icon($image-sprite-path, -4px, -280px);
+      }
+      @at-root #{&}--failed:hover img {
+        @include activity-icon($image-sprite-path, -4px, -4108px);
+      }
+      @at-root #{&}--disabled img {
+        @include activity-icon($image-sprite-path, -4px, -2965px);
+      }
+      @at-root #{&}--disabled:hover img {
+        @include activity-icon($image-sprite-path, -4px, -476px);
+      }
+    }
+  }
+}

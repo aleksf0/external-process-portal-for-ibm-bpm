@@ -1,0 +1,8 @@
+.preloader {
+  width: 100%;
+  text-align: center;
+
+  @at-root #{&}__image {
+    width: 100px;
+  }
+}

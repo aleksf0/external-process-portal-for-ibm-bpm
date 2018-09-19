@@ -1,0 +1,40 @@
+$image-sprite-path: '../../../images/portal_sprite.png';
+
+.exposed-item {
+
+  @at-root #{&} .btn-group {
+    margin-left: 10px;
+  }
+
+  @at-root #{&}__link {
+    color: black;
+    @at-root #{&}-container {
+      font-size: 12px;
+      padding-left: 5px;
+    }
+    @at-root #{&}--enabled {
+      cursor: pointer;
+    }
+    @at-root #{&}--disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  @at-root #{&}__icon {
+    @at-root #{&}--service {
+      height: 20px;
+      width: 0px;
+      padding-left: 20px;
+      background: url($image-sprite-path) -330px -90px no-repeat;
+    }
+    @at-root #{&}--process {
+      margin-top: 3px;
+      margin-bottom: 3px;
+      height: 14px;
+      width: 0px;
+      padding-left: 20px;
+      background: url($image-sprite-path) -344px -288px no-repeat;
+    }
+  }
+}
+

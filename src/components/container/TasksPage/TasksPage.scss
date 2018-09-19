@@ -1,0 +1,5 @@
+.tasks-page {
+  @at-root #{&}__action-picker {
+    text-align: right;
+  }
+}

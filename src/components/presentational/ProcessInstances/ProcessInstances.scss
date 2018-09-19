@@ -1,0 +1,80 @@
+$image-sprite-path: '../../../images/dashboard_sprite.png';
+
+@mixin status-icon($sprite, $left, $top) {
+  height: 50px;
+  width: 50px;
+  padding-right: 50px;
+  margin-right: 10px;
+  background: url($sprite) $left $top repeat-x;
+}
+
+.process-instance {
+
+  @at-root #{&} .panel-body {
+    padding: 10px 5px 5px 5px;
+    background: linear-gradient(to bottom right, #DADEE4, #F6F7F9);
+    @at-root #{&}:hover {
+      background: linear-gradient(to bottom right, #DADEFF, #F6F7F9);
+    }
+  }
+
+  @at-root #{&}__link {
+    color: #003f6b;
+    font-size: 14px;
+    font-weight: bold;
+    @at-root #{&}--enabled {
+      cursor: pointer;
+    }
+    @at-root #{&}--disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  @at-root #{&}__created-date {
+    @at-root #{&}-container {
+      font-size: 10px;
+      margin-left: 62px;
+      padding-top: 0px;
+    }
+    @at-root #{&}-prefix {
+      font-weight: bold;
+    }
+  }
+
+  @at-root #{&}__date {
+    @at-root #{&}-details-container {
+      font-size: 10px;
+      text-align: right;
+    }
+    @at-root #{&}-prefix {
+      font-weight: bold;
+    }
+  }
+
+  @at-root #{&}__icon {
+    @at-root #{&}--overdue-active {
+      @include status-icon($image-sprite-path, -4px, -1845px);
+    }
+    @at-root #{&}--overdue-suspended {
+      @include status-icon($image-sprite-path, -4px, -8553px);
+    }
+    @at-root #{&}--on-track-active {
+      @include status-icon($image-sprite-path, -4px, -2341px);
+    }
+    @at-root #{&}--on-track-suspended {
+      @include status-icon($image-sprite-path, -4px, -4708px);
+    }
+    @at-root #{&}--at-risk-active {
+      @include status-icon($image-sprite-path, -4px, -6308px);
+    }
+    @at-root #{&}--at-risk-suspended {
+      @include status-icon($image-sprite-path, -4px, -5240px);
+    }
+    @at-root #{&}--failed {
+      @include status-icon($image-sprite-path, -4px, -6917px);
+    }
+    @at-root #{&}--completed {
+      @include status-icon($image-sprite-path, -4px, -5797px);
+    }
+  }
+}

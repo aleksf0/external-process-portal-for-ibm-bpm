@@ -1,0 +1,11 @@
+{
+  "api": {
+    "environmentUrl": "https://y38522.danskenet.net",
+    "certPath": "ssl/DanskeBank/DanskeBankRootCa.cer",
+    "toolkits": {
+      "dashboards": {
+        "snapshotId": "2064.0d36fbf6-e92d-4ab1-895e-f755129cc633"
+      }
+    }
+  }
+}

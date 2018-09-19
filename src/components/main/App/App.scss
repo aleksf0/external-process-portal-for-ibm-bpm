@@ -1,0 +1,12 @@
+#app {
+  padding-top: 51px; /* Moving the contents down due to the fixed header bar of height 50px */
+  font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #4d4d4d;
+  margin: 0 auto;
+}
+
+/* Overriding the default toastr position to add extra space on top due to fixed header */
+.toast-top-right-custom {
+  top: 60px;
+  right: 12px;
+}

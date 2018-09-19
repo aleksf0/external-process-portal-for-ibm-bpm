@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    body {
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+    }
+    label {
+      display: inline-block;
+      width: 100px;
+      text-align: right;
+      vertical-align: top;
+      margin-top: 10px;
+    }
+    input {
+      width: 200px;
+      margin-top: 10px;
+    }
+    textarea {
+      width: 700px;
+      height: 50px;
+      margin-top: 10px;
+    }
+    button {
+      margin-top: 10px;
+    }
+    div#result {
+      margin-left: 30px;
+    }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("button").click(function (event) {
+        event.preventDefault();
+        var form = document.forms['mainForm'];
+        $.ajax({
+          url: form['url'].value,
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Basic " + btoa(form['username'].value + ":" + form['password'].value));
+          },
+          success: function (result, status, xhr) {
+            showResult("<b>Result</b>:<pre>" + escapeHtml(JSON.stringify(result, null, 4)) + "</pre><b>Status:</b><pre>" + status + "</pre>");
+          },
+          error: function (xhr, status, error) {
+            showResult("<b>XHR:</b><pre>" + escapeHtml(JSON.stringify(xhr, null, 4)) + "</pre><b>Status:</b><pre>" + status + "</pre><b>Error</b><pre>" + error + "</pre>");
+          }
+        });
+      });
+    });
+
+    function showResult(data) {
+      $("#result").html(data);
+    }
+
+    var entityMap = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;',
+      '/': '&#x2F;',
+      '`': '&#x60;',
+      '=': '&#x3D;'
+    };
+
+    function escapeHtml(string) {
+      return String(string).replace(/[&<>"'`=\/]/g, function (s) {
+        return entityMap[s];
+      });
+    }
+  </script>
+</head>
+
+<body>
+  <h1>BPM REST Tester for Front-End</h1>
+  <hr/>
+  <form name='mainForm'>
+    <label for="username">Username:</label>
+    <input type="text" name="username" value="BB6545" />
+    <br/>
+    <label for="password">Password:</label>
+    <input type="password" name="password" value="" />
+    <br/>
+    <label for="url">URL:</label>
+    <textarea name="url">http://localhost:3000/bpm-rest/rest/bpm/wle/v1/process/94124?parts=header%7Cdata</textarea>
+    <br/>
+    <label for="execute">&nbsp;</label>
+    <button name="execute">Execute</button>
+  </form>
+  <br/><br/>
+  <div id="result"></div>
+</body>
+
+</html>
