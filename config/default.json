@@ -1,19 +1,19 @@
 {
   "api": {
-    "environmentUrl": "https://dev-bpm.danskenet.net",
-    "certPath": "ssl/DanskeBank/DanskeBankInternalRootCaHw.cer",
+    "environmentUrl": "https://dev-bpm.somecompany.org",
+    "certPath": "ssl/SomeCompany/SomeCompanyInternalRootCaHw.cer",
     "toolkits": {
       "dashboards": {
         "snapshotId": "2064.95c9fb3c-e4a2-48af-91df-dbcda7a90a17",
         "serviceIds": {
-          "instanceSearch": "1.5d7ad0de-b56d-4d07-a2c4-b58584b42eeb", // Default Instance List Service
-          "instanceBusinessData": "1.ce647fdf-0152-43c4-9564-a397bcebd8c4", // Default Data Service
-          "instanceTasks": "1.6a8bf196-6b77-4007-9747-6e649029d783", // Default Instance Tasks List Service
-          "instanceActivities" : "1.9de05466-2359-495e-8a6a-1ce4493bc92e" // Default Instance Activities List Service
+          "instanceSearch": "1.5d7ad0de-b56d-4d07-a2c4-b58584b42eeb",
+          "instanceBusinessData": "1.ce647fdf-0152-43c4-9564-a397bcebd8c4",
+          "instanceTasks": "1.6a8bf196-6b77-4007-9747-6e649029d783",
+          "instanceActivities" : "1.9de05466-2359-495e-8a6a-1ce4493bc92e"
         }
       }
     }
   },
-  "authentication": "kerberos", //basic or kerberos
+  "authentication": "kerberos",
   "dateTimeFormat": "YYYY-MM-DD HH:mm:ss"
 }

@@ -25,8 +25,8 @@
     "generate-global-vars": "babel-node tools/generateGlobalVarsScript.js",
     "clean-dist": "npm run remove-dist && mkdir dist",
     "remove-dist": "rimraf ./dist",
-    "webhook": "curl -X POST -H \"Content-Type: application/json\" https://openshift-dblan.danskenet.net:8443/oapi/v1/namespaces/birdie-wffb-dev/buildconfigs/birdie-portal/webhooks/b925e6097bf94512/generic --insecure",
-    "oc:login:cicd": "oc login https://openshift-dblan.danskenet.net:8443 --token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJiaXJkaWUtd2ZmYi1kZXYiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlY3JldC5uYW1lIjoiY2ljZC10b2tlbi14aHpsaCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJjaWNkIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiZWU4NzViNjItYzk3OC0xMWU3LTkxYzAtMDA1MDU2YTAxYTYyIiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50OmJpcmRpZS13ZmZiLWRldjpjaWNkIn0.ZpMQDWw1vrQgPMOdb3ZbzZHClFDXwy61SQQzokRg6Bsa-FazPmKReTlqvuiJ3mEe7D9RsjHse7OxiwCiult7UmdS5CFfzVteoWWjazIoQxWdmDT9SP2AkaHbpVcjs7Ch1-Tt1zdr3oSrzPL_tmQvbP5FsqMjIBar4xx-edvGMPBx131M59HHi4P2GdiSfb_LiSF66DQxy6k9LkOk3d-9rpQCAQTEEWP1Tl9M4TJYd8iSWe54nNKp0irSvHlwJGRk8jd6vPts530VGZJWEqwW0mqgrHGI2m8Cm4SmiqnYtcFaJzcgJUv4BJwHusUzjE4nYP6wBnI1Qs3yLC7dg-BTnQ",
+    "webhook": "curl -X POST -H \"Content-Type: application/json\" https://openshift-dblan.somecompany.org:8443/oapi/v1/namespaces/birdie-wffb-dev/buildconfigs/birdie-portal/webhooks/b925e6097bf94512/generic --insecure",
+    "oc:login:cicd": "oc login https://openshift-dblan.somecompany.org:8443 --token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJiaXJkaWUtd2ZmYi1kZXYiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlY3JldC5uYW1lIjoiY2ljZC10b2tlbi14aHpsaCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJjaWNkIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiZWU4NzViNjItYzk3OC0xMWU3LTkxYzAtMDA1MDU2YTAxYTYyIiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50OmJpcmRpZS13ZmZiLWRldjpjaWNkIn0.ZpMQDWw1vrQgPMOdb3ZbzZHClFDXwy61SQQzokRg6Bsa-FazPmKReTlqvuiJ3mEe7D9RsjHse7OxiwCiult7UmdS5CFfzVteoWWjazIoQxWdmDT9SP2AkaHbpVcjs7Ch1-Tt1zdr3oSrzPL_tmQvbP5FsqMjIBar4xx-edvGMPBx131M59HHi4P2GdiSfb_LiSF66DQxy6k9LkOk3d-9rpQCAQTEEWP1Tl9M4TJYd8iSWe54nNKp0irSvHlwJGRk8jd6vPts530VGZJWEqwW0mqgrHGI2m8Cm4SmiqnYtcFaJzcgJUv4BJwHusUzjE4nYP6wBnI1Qs3yLC7dg-BTnQ",
     "oc:tag:test": "oc tag birdie-wffb-dev/birdie-portal:latest birdie-wffb-test/birdie-portal:rdy_test",
     "oc:tag:syst": "oc tag birdie-wffb-test/birdie-portal:rdy_test birdie-wffb-syst/birdie-portal:rdy_syst",
     "oc:tag:prod": "oc tag birdie-wffb-syst/birdie-portal:rdy_syst birdie-wffb/birdie-portal:rdy_prod",
@@ -40,7 +40,7 @@
     "open:cover": "npm run test:cover && opn ./coverage/lcov-report/index.html",
     "analyze-bundle": "babel-node ./tools/analyzeBundle.js"
   },
-  "author": "Enterprise Systems, Danske Bank",
+  "author": "Enterprise Systems, Some Company",
   "license": "UNLICENSED",
   "dependencies": {
     "babel-polyfill": "6.20.0",

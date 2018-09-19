@@ -54,7 +54,7 @@ export default TaskApi;
  *   federationMode: true
  * }
  *
- * Which produces this query string for server URL (e.g. https://test-bpm.danskenet.net/rest/bpm/wle/v1/tasks/query/IBM.DEFAULTALLTASKSLIST_75):
+ * Which produces this query string for server URL (e.g. https://test-bpm.somecompany.org/rest/bpm/wle/v1/tasks/query/IBM.DEFAULTALLTASKSLIST_75):
  *
  * ?selectedAttributes=TAD_DISPLAY_NAME,PRIORITY,DUE,PI_DISPLAY_NAME,ASSIGNED_TO_ROLE_DISPLAY_NAME,NAME,PI_PIID,PI_NAME,OWNER,STATE,IS_AT_RISK,TKIID
  * &interactionFilter=ASSESS_AND_WORK_ON&searchFilter=BranchGroup:gr9h%20OR%20Branch:4649&sortAttributes=IS_AT_RISK%20DESC,DUE%20ASC,TKIID%20ASC

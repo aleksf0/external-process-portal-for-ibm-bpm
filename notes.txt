@@ -24,13 +24,13 @@ Prerequisites
 
 Stash/Git repository setup:
 ================
-* Export the Danske Bank Root CA certificate in Base-64 encoded X.509 format from https://stash.danskenet.net/.
+* Export the Some Company Root CA certificate in Base-64 encoded X.509 format from https://stash.somecompany.org/.
 * Append it to the end of C:/Tools/PortableGit/mingw64/ssl/certs/ca-bundle.crt
 * Clone the wanted repository while in the projects root directory:
-  git clone https://afok@stash.danskenet.net/scm/bpm/bpm-portal.git
+  git clone https://afok@stash.somecompany.org/scm/bpm/bpm-portal.git
 * Navigate to the cloned project directory and run the following commands to set author options:
   git config --local user.name "Aleksandr Fokin"
-  git config --local user.email "afok@danskebank.lt"
+  git config --local user.email "afok@somecompany.org"
 
 
 Most common git commands:
@@ -45,23 +45,23 @@ Most common git commands:
 
 Proxy setup - npm & corporate network
 ================
-* Export the Danske Bank - Proxy CA certificate in Base-64 encoded X.509 format from https://registry.npmjs.org/.
+* Export the Some Company - Proxy CA certificate in Base-64 encoded X.509 format from https://registry.npmjs.org/.
 * Append it to the end of C:/Tools/PortableGit/mingw64/ssl/certs/ca-bundle.crt
 * Execute the following npm commands to amend the user config located at C:\Users\BB6545\.npmrc
   >npm config set cafile C:/Tools/PortableGit/mingw64/ssl/certs/ca-bundle.crt
-  >npm config set proxy http://w89700-wcg.danskenet.net:8080
-  >npm config set https-proxy http://w89700-wcg.danskenet.net:8080
+  >npm config set proxy http://w89700-wcg.somecompany.org:8080
+  >npm config set https-proxy http://w89700-wcg.somecompany.org:8080
 
   OR just copy these contents to the .npmrc file within the project
 
   cafile=C:\Tools\PortableGit\mingw64\ssl\certs\ca-bundle.crt
-  proxy=http://w89700-wcg.danskenet.net:8080/
-  https-proxy=http://w89700-wcg.danskenet.net:8080
+  proxy=http://w89700-wcg.somecompany.org:8080/
+  https-proxy=http://w89700-wcg.somecompany.org:8080
 
-* The official Danske Bank way is to use artefactory instead of default npm nodejs registry:
-  >npm config set registry http://artifactory.danskenet.net/artifactory/api/npm/joined-npm-build
+* The official Some Company way is to use artefactory instead of default npm nodejs registry:
+  >npm config set registry http://artifactory.somecompany.org/artifactory/api/npm/joined-npm-build
   OR just copy these contents to the .npmrc file within the project
-  registry=http://artifactory.danskenet.net/artifactory/api/npm/joined-npm-build
+  registry=http://artifactory.somecompany.org/artifactory/api/npm/joined-npm-build
 
 
 Starter Kit:
@@ -81,9 +81,9 @@ import url from 'url';
 import proxy from 'proxy-middleware';
 import fs from 'fs';
 ...
-let proxyOptions = url.parse('https://dev-bpm.danskenet.net');
-proxyOptions.route = '/bpm-rest'; // requests to /bpm-rest/x/y/z are proxied to https://dev-bpm.danskenet.net/x/y/z
-proxyOptions.ca = [fs.readFileSync('c:/Tools/SSL/DanskeBank/DanskeBankInternalRootCaHw.cer', {encoding: 'utf-8'})];
+let proxyOptions = url.parse('https://dev-bpm.somecompany.org');
+proxyOptions.route = '/bpm-rest'; // requests to /bpm-rest/x/y/z are proxied to https://dev-bpm.somecompany.org/x/y/z
+proxyOptions.ca = [fs.readFileSync('c:/Tools/SSL/SomeCompany/SomeCompanyInternalRootCaHw.cer', {encoding: 'utf-8'})];
 ...
 server: {
   middleware: [
@@ -249,7 +249,7 @@ OpenShift
 Logging in and selected a project:
 ----
 oc config view
-oc login https://openshift-dblan.danskenet.net:8443
+oc login https://openshift-dblan.somecompany.org:8443
 oc project birdie-wffb-dev
 
 Connecting to Pod shell:
@@ -334,32 +334,32 @@ SSL
 
 Confluence:
 ----
-https://confluence.danskenet.net/display/DT/Public+Key+Infrastructure
-https://confluence.danskenet.net/display/DT/Internal+PKI+Self+Service
+https://confluence.somecompany.org/display/DT/Public+Key+Infrastructure
+https://confluence.somecompany.org/display/DT/Internal+PKI+Self+Service
 
 CA signing self-service (IE):
 ----
-http://icert.danskenet.net/
+http://icert.somecompany.org/
 
 Template:
 ----
-openssl req -nodes -newkey rsa:2048 -sha256 -keyout <FQDN>.key -out <FQDN>.csr -reqexts SAN -extensions SAN -subj '/CN=<FQDN>/OU=<SPI-SubSPI>/O=Danske Bank A\/S/L=Copenhagen/C=DK/emailAddress=<email>@danskebank.dk' -config <(cat /etc/ssl/openssl.cnf; printf "[SAN]\nsubjectAltName=DNS:<FQDN>")
+openssl req -nodes -newkey rsa:2048 -sha256 -keyout <FQDN>.key -out <FQDN>.csr -reqexts SAN -extensions SAN -subj '/CN=<FQDN>/OU=<SPI-SubSPI>/O=Some Company A\/S/L=Copenhagen/C=DK/emailAddress=<email>@somecompany.org' -config <(cat /etc/ssl/openssl.cnf; printf "[SAN]\nsubjectAltName=DNS:<FQDN>")
 
 Generate PROD csr and new private key:
 ----
-openssl req -nodes -newkey rsa:2048 -sha256 -keyout birdie.danskenet.net.key -out birdie.danskenet.net.csr -reqexts SAN -extensions SAN -subj '/CN=birdie.danskenet.net/OU=WF-FB/O=Danske Bank A\/S/L=Copenhagen/C=DK/emailAddress=dgitl_full_birdie@exchange.danskebank.com' -config <(cat /etc/ssl/openssl.cnf; printf "[SAN]\nsubjectAltName=DNS:birdie.danskenet.net")
+openssl req -nodes -newkey rsa:2048 -sha256 -keyout birdie.somecompany.org.key -out birdie.somecompany.org.csr -reqexts SAN -extensions SAN -subj '/CN=birdie.somecompany.org/OU=WF-FB/O=Some Company A\/S/L=Copenhagen/C=DK/emailAddress=dgitl_full_birdie@exchange.somecompany.org' -config <(cat /etc/ssl/openssl.cnf; printf "[SAN]\nsubjectAltName=DNS:birdie.somecompany.org")
 
 Generate DEV csr using existing private key:
 ----
-openssl req -sha256 -key birdie.danskenet.net.key -new -out dev-birdie.danskenet.net.csr -reqexts SAN -extensions SAN -subj '/CN=dev-birdie.danskenet.net/OU=WF-FB/O=Danske Bank A\/S/L=Copenhagen/C=DK/emailAddress=dgitl_full_birdie@exchange.danskebank.com' -config <(cat /etc/ssl/openssl.cnf; printf "[SAN]\nsubjectAltName=DNS:dev-birdie.danskenet.net")
+openssl req -sha256 -key birdie.somecompany.org.key -new -out dev-birdie.somecompany.org.csr -reqexts SAN -extensions SAN -subj '/CN=dev-birdie.somecompany.org/OU=WF-FB/O=Some Company A\/S/L=Copenhagen/C=DK/emailAddress=dgitl_full_birdie@exchange.somecompany.org' -config <(cat /etc/ssl/openssl.cnf; printf "[SAN]\nsubjectAltName=DNS:dev-birdie.somecompany.org")
 
 Generate TEST csr using existing private key:
 ----
-openssl req -sha256 -key birdie.danskenet.net.key -new -out test-birdie.danskenet.net.csr -reqexts SAN -extensions SAN -subj '/CN=test-birdie.danskenet.net/OU=WF-FB/O=Danske Bank A\/S/L=Copenhagen/C=DK/emailAddress=dgitl_full_birdie@exchange.danskebank.com' -config <(cat /etc/ssl/openssl.cnf; printf "[SAN]\nsubjectAltName=DNS:test-birdie.danskenet.net")
+openssl req -sha256 -key birdie.somecompany.org.key -new -out test-birdie.somecompany.org.csr -reqexts SAN -extensions SAN -subj '/CN=test-birdie.somecompany.org/OU=WF-FB/O=Some Company A\/S/L=Copenhagen/C=DK/emailAddress=dgitl_full_birdie@exchange.somecompany.org' -config <(cat /etc/ssl/openssl.cnf; printf "[SAN]\nsubjectAltName=DNS:test-birdie.somecompany.org")
 
 Generate SYST csr using existing private key:
 ----
-openssl req -sha256 -key birdie.danskenet.net.key -new -out syst-birdie.danskenet.net.csr -reqexts SAN -extensions SAN -subj '/CN=syst-birdie.danskenet.net/OU=WF-FB/O=Danske Bank A\/S/L=Copenhagen/C=DK/emailAddress=dgitl_full_birdie@exchange.danskebank.com' -config <(cat /etc/ssl/openssl.cnf; printf "[SAN]\nsubjectAltName=DNS:syst-birdie.danskenet.net")
+openssl req -sha256 -key birdie.somecompany.org.key -new -out syst-birdie.somecompany.org.csr -reqexts SAN -extensions SAN -subj '/CN=syst-birdie.somecompany.org/OU=WF-FB/O=Some Company A\/S/L=Copenhagen/C=DK/emailAddress=dgitl_full_birdie@exchange.somecompany.org' -config <(cat /etc/ssl/openssl.cnf; printf "[SAN]\nsubjectAltName=DNS:syst-birdie.somecompany.org")
 
 
 React Context
@@ -437,7 +437,7 @@ Exposed Items:
 https://www.ibm.com/support/knowledgecenter/en/SSFTBX_8.5.5/com.ibm.wbpm.ref.doc/rest/bpmrest/rest_bpm_wle_v1_exposed_type_get.htm
 
 old: http://localhost:3000/bpm-rest/rest/bpm/wle/v1/exposed?includeServiceSubtypes=startable_service&excludeProcessStartUrl=false
-new: https://dev-bpm.danskenet.net /rest/bpm/wle/v1/exposed?includeServiceSubtypes=startable_service,dashboard&excludeReferencedFromToolkit=null&federationMode=true&dojo.preventCache=1503767147951
+new: https://dev-bpm.somecompany.org /rest/bpm/wle/v1/exposed?includeServiceSubtypes=startable_service,dashboard&excludeReferencedFromToolkit=null&federationMode=true&dojo.preventCache=1503767147951
      http://localhost:3000/bpm-rest/rest/bpm/wle/v1/exposed?includeServiceSubtypes=startable_service&excludeProcessStartUrl=false&excludeReferencedFromToolkit=null&federationMode=true
 
 process - start url
@@ -471,31 +471,31 @@ https://github.com/reactjs/redux/issues/723
 
 Saved Searches - tasks:
 ================
-https://dev-bpm.danskenet.net/rest/bpm/wle/v1/tasks/queries?userParametersAllowed=false&federationMode=true&dojo.preventCache=1503767151849
+https://dev-bpm.somecompany.org/rest/bpm/wle/v1/tasks/queries?userParametersAllowed=false&federationMode=true&dojo.preventCache=1503767151849
 
 
 Saved Searches - process instances:
 ================
-https://dev-bpm.danskenet.net/rest/bpm/wle/v1/processes/queries?userParametersAllowed=false&federationMode=true&dojo.preventCache=1503767151931
+https://dev-bpm.somecompany.org/rest/bpm/wle/v1/processes/queries?userParametersAllowed=false&federationMode=true&dojo.preventCache=1503767151931
 
 
 Task Actions - ?
 ================
-https://dev-bpm.danskenet.net/rest/bpm/wle/v1/task/actions?taskIDs=692318%2C701059%2C701305%2C702506%2C704131%2C704134%2C704200%2C699287%2C704386%2C704603%2C704632%2C704995%2C705030%2C706692%2C706005%2C704630%2C704384%2C704551%2C708154%2C708177%2C706021%2C710577%2C710498%2C710578%2C710613%2C710614&actions=ACTION_CLAIM,ACTION_COMPLETE,ACTION_CANCELCLAIM,ACTION_REASSIGNTOUSER,ACTION_REASSIGNTOGROUP,ACTION_UPDATEPRIORITY,ACTION_UPDATEDUEDATE,ACTION_ADDCOMMENT&federationMode=true&dojo.preventCache=1503767158206
+https://dev-bpm.somecompany.org/rest/bpm/wle/v1/task/actions?taskIDs=692318%2C701059%2C701305%2C702506%2C704131%2C704134%2C704200%2C699287%2C704386%2C704603%2C704632%2C704995%2C705030%2C706692%2C706005%2C704630%2C704384%2C704551%2C708154%2C708177%2C706021%2C710577%2C710498%2C710578%2C710613%2C710614&actions=ACTION_CLAIM,ACTION_COMPLETE,ACTION_CANCELCLAIM,ACTION_REASSIGNTOUSER,ACTION_REASSIGNTOGROUP,ACTION_UPDATEPRIORITY,ACTION_UPDATEDUEDATE,ACTION_ADDCOMMENT&federationMode=true&dojo.preventCache=1503767158206
 
 
 Instance Search - Dashboards Toolkit / 8.5.6.0 / Default Instance List Service
 =======================
 Clean
- https://dev-bpm.danskenet.net/rest/bpm/wle/v1/service/1.5d7ad0de-b56d-4d07-a2c4-b58584b42eeb?snapshotId=2064.51981cbe-66b0-43f0-ad26-77b9bc46c1bc&action=start&createTask=false&parts=all&params=%7B%22searchFilter%22%3Anull%2C%22stateFilter%22%3A%22Active%22%2C%22maxResults%22%3A26%7D
+ https://dev-bpm.somecompany.org/rest/bpm/wle/v1/service/1.5d7ad0de-b56d-4d07-a2c4-b58584b42eeb?snapshotId=2064.51981cbe-66b0-43f0-ad26-77b9bc46c1bc&action=start&createTask=false&parts=all&params=%7B%22searchFilter%22%3Anull%2C%22stateFilter%22%3A%22Active%22%2C%22maxResults%22%3A26%7D
 With filter
- https://dev-bpm.danskenet.net/rest/bpm/wle/v1/service/1.5d7ad0de-b56d-4d07-a2c4-b58584b42eeb?snapshotId=2064.51981cbe-66b0-43f0-ad26-77b9bc46c1bc&action=start&createTask=false&parts=all&params=%7B%22searchFilter%22%3A%22fiop%22%2C%22stateFilter%22%3A%22Active%22%2C%22maxResults%22%3A26%7D
- https://dev-bpm.danskenet.net/rest/bpm/wle/v1/service/1.5d7ad0de-b56d-4d07-a2c4-b58584b42eeb?snapshotId=2064.95c9fb3c-e4a2-48af-91df-dbcda7a90a17&action=start&createTask=false&parts=all&params=%7B%22searchFilter%22%3A%22fiop%22%2C%22stateFilter%22%3A%22Active%22%2C%22maxResults%22%3A26%7D
-https://test-bpm.danskenet.net/rest/bpm/wle/v1/service/1.5d7ad0de-b56d-4d07-a2c4-b58584b42eeb?snapshotId=2064.95c9fb3c-e4a2-48af-91df-dbcda7a90a17&action=start&createTask=false&parts=all&params=%7B%22searchFilter%22%3A%22fiop%22%2C%22stateFilter%22%3A%22Active%22%2C%22maxResults%22%3A26%7D
-https://syst-bpm.danskenet.net/rest/bpm/wle/v1/service/1.5d7ad0de-b56d-4d07-a2c4-b58584b42eeb?snapshotId=2064.95c9fb3c-e4a2-48af-91df-dbcda7a90a17&action=start&createTask=false&parts=all&params=%7B%22searchFilter%22%3A%22fiop%22%2C%22stateFilter%22%3A%22Active%22%2C%22maxResults%22%3A26%7D
-     https://bpm.danskenet.net/rest/bpm/wle/v1/service/1.5d7ad0de-b56d-4d07-a2c4-b58584b42eeb?snapshotId=2064.95c9fb3c-e4a2-48af-91df-dbcda7a90a17&action=start&createTask=false&parts=all&params=%7B%22searchFilter%22%3A%22fiop%22%2C%22stateFilter%22%3A%22Active%22%2C%22maxResults%22%3A26%7D
+ https://dev-bpm.somecompany.org/rest/bpm/wle/v1/service/1.5d7ad0de-b56d-4d07-a2c4-b58584b42eeb?snapshotId=2064.51981cbe-66b0-43f0-ad26-77b9bc46c1bc&action=start&createTask=false&parts=all&params=%7B%22searchFilter%22%3A%22fiop%22%2C%22stateFilter%22%3A%22Active%22%2C%22maxResults%22%3A26%7D
+ https://dev-bpm.somecompany.org/rest/bpm/wle/v1/service/1.5d7ad0de-b56d-4d07-a2c4-b58584b42eeb?snapshotId=2064.95c9fb3c-e4a2-48af-91df-dbcda7a90a17&action=start&createTask=false&parts=all&params=%7B%22searchFilter%22%3A%22fiop%22%2C%22stateFilter%22%3A%22Active%22%2C%22maxResults%22%3A26%7D
+https://test-bpm.somecompany.org/rest/bpm/wle/v1/service/1.5d7ad0de-b56d-4d07-a2c4-b58584b42eeb?snapshotId=2064.95c9fb3c-e4a2-48af-91df-dbcda7a90a17&action=start&createTask=false&parts=all&params=%7B%22searchFilter%22%3A%22fiop%22%2C%22stateFilter%22%3A%22Active%22%2C%22maxResults%22%3A26%7D
+https://syst-bpm.somecompany.org/rest/bpm/wle/v1/service/1.5d7ad0de-b56d-4d07-a2c4-b58584b42eeb?snapshotId=2064.95c9fb3c-e4a2-48af-91df-dbcda7a90a17&action=start&createTask=false&parts=all&params=%7B%22searchFilter%22%3A%22fiop%22%2C%22stateFilter%22%3A%22Active%22%2C%22maxResults%22%3A26%7D
+     https://bpm.somecompany.org/rest/bpm/wle/v1/service/1.5d7ad0de-b56d-4d07-a2c4-b58584b42eeb?snapshotId=2064.95c9fb3c-e4a2-48af-91df-dbcda7a90a17&action=start&createTask=false&parts=all&params=%7B%22searchFilter%22%3A%22fiop%22%2C%22stateFilter%22%3A%22Active%22%2C%22maxResults%22%3A26%7D
 
-https://dev-bpm.danskenet.net/rest/bpm/wle/v1/service/1.5d7ad0de-b56d-4d07-a2c4-b58584b42eeb
+https://dev-bpm.somecompany.org/rest/bpm/wle/v1/service/1.5d7ad0de-b56d-4d07-a2c4-b58584b42eeb
 ?snapshotId=2064.95c9fb3c-e4a2-48af-91df-dbcda7a90a17
 &action=start
 &createTask=false
@@ -507,34 +507,34 @@ Instance Overview:
 =======================
 Instance Data - POST
 ----
-https://dev-bpm.danskenet.net/rest/bpm/wle/v1/coachflow/instancedata
+https://dev-bpm.somecompany.org/rest/bpm/wle/v1/coachflow/instancedata
 {"params":{"instancedata":true,"IDs":{"branchId":"2063.34a0ce6e-631b-465d-b0dc-414c39fb893f","modelID":"1.428b1161-dfad-44f6-ab57-e12ab9838ed6","instanceID":"115474"}}}
 {"status":"200","data":{"instancedata":{"user":{"id":"2604","name":"BB6545","fullName":"Aleksandr Fokin","baseTextDirection":"generalPreference.fields.baseTextDir.contextual","locale":"en","localeDescription":"English","teams":[{"id":"24.da7e4d23-78cb-4483-98ed-b9c238308a03","name":"All Users"},{"id":"24.581a472b-5016-479a-b5b5-0a9701c2c42c","name":"Managers"},{"id":"24.53b76f8a-9bb5-479b-ac3d-4571163c7a9f","name":"Process Owner"}],"manages":[]},"processInstance":{"id":"2072.115474","name":"FIOP Prod: 115474","dueDate":"2017-09-28T13:35:58Z","startDate":"2017-08-17T13:35:40Z","process":{"name":"CreditAndLoans1_BPD"},"processApp":{"id":"2066.800a5c23-f929-4b42-b1e6-4ba19130588a","name":"WFFB_CreditAndLoans1_PA","acronym":"WFFB020","snapshot":{"id":"2064.c7d753b7-15a9-41c2-a296-5538a18056d7"}}},"context":{},"whitelist":[""],"refreshConfigOptions":{"timerCoachViewEnabled":true,"timerCoachViewRefreshInterval":-1,"minimumCoachViewRefreshInterval":10,"pushNotificationsEnabled":true}}}}
 
 Activity List - Default Instance Activities List Service (POST)
 ----
-https://dev-bpm.danskenet.net/rest/bpm/wle/v1/service/1.9de05466-2359-495e-8a6a-1ce4493bc92e?snapshotId=2064.51981cbe-66b0-43f0-ad26-77b9bc46c1bc&action=start&createTask=false&parts=all&params={"selectedInstanceId":"115502","activityListProperties":{"checkActions":["ACTION_VIEW_ACTIVITY","ACTION_START_ACTIVITY"],"sortCriteria":{"listAllSelectedIndices":[],"items":["STATE_ASC","OPTIONTYPE_ASC","NAME_ASC"]},"filters":{"listAllSelectedIndices":[],"items":[{"executionStateFilter":{"listAllSelectedIndices":[],"items":["READY","WAITING"]},"executionTypeFilter":{"listAllSelectedIndices":[],"items":["MANUAL"]}}]},"hiddenFilter":"NOT_HIDDEN"}}
+https://dev-bpm.somecompany.org/rest/bpm/wle/v1/service/1.9de05466-2359-495e-8a6a-1ce4493bc92e?snapshotId=2064.51981cbe-66b0-43f0-ad26-77b9bc46c1bc&action=start&createTask=false&parts=all&params={"selectedInstanceId":"115502","activityListProperties":{"checkActions":["ACTION_VIEW_ACTIVITY","ACTION_START_ACTIVITY"],"sortCriteria":{"listAllSelectedIndices":[],"items":["STATE_ASC","OPTIONTYPE_ASC","NAME_ASC"]},"filters":{"listAllSelectedIndices":[],"items":[{"executionStateFilter":{"listAllSelectedIndices":[],"items":["READY","WAITING"]},"executionTypeFilter":{"listAllSelectedIndices":[],"items":["MANUAL"]}}]},"hiddenFilter":"NOT_HIDDEN"}}
 {"status":"200","data":{"serviceStatus":"end","key":"@97653","step":"End","data":{"activityListData":{"activities":{"selected":[],"items":[{"id":"2118.3f99843b-aea0-44b6-b1de-9324e86d1ff1","name":"Manage Documents","executionState":"READY","activityType":"CALLED_PROCESS","executionType":"MANUAL","optionType":"OPTIONAL","required":false,"repeatable":true,"hidden":false,"startDate":"","endDate":"","actions":{"selected":[],"items":["ACTION_VIEW_ACTIVITY","ACTION_START_ACTIVITY"],"@metadata":{"objectID":"1d5c9f02-8738-41a9-9785-7da694e7d748","dirty":true,"invalid":false,"shared":false}},"@metadata":{"objectID":"e7ce9af3-6353-4c5c-9265-c73456a76239","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"ActivityListItem"}}],"@metadata":{"objectID":"940192e2-1741-4ddf-beeb-68c056d475d6","dirty":true,"invalid":false,"shared":false}},"@metadata":{"objectID":"9225ce00-18d1-439c-aaf5-995f93b927c1","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"ActivityListData"}}},"actions":null}}
 
 Business data - Default Data Service (POST)
 ----
-https://dev-bpm.danskenet.net/rest/bpm/wle/v1/service/1.ce647fdf-0152-43c4-9564-a397bcebd8c4?snapshotId=2064.51981cbe-66b0-43f0-ad26-77b9bc46c1bc&action=start&createTask=false&parts=all&params={"selectedInstanceId":"115502"}
+https://dev-bpm.somecompany.org/rest/bpm/wle/v1/service/1.ce647fdf-0152-43c4-9564-a397bcebd8c4?snapshotId=2064.51981cbe-66b0-43f0-ad26-77b9bc46c1bc&action=start&createTask=false&parts=all&params={"selectedInstanceId":"115502"}
 {"status":"200","data":{"serviceStatus":"end","key":"@97652","step":"End","data":{"businessData":{"selected":[],"items":[{"type":"String","alias":"Branch","label":"Branch","value":"4649","@metadata":{"objectID":"24cc018a-8b7d-4dd3-81c7-225016a8b7d7","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"BusinessData"}},{"type":"String","alias":"branchGroup","label":"Branch Group","value":"GR24TLANDB","@metadata":{"objectID":"5c6e0bc4-0e6d-4643-ba91-83d0cd452eef","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"BusinessData"}},{"type":"String","alias":"CaseCorrelationId","label":"Case Correlation Id","value":"a0149273-9966-42ad-b20b-81c6445f0238","@metadata":{"objectID":"7484d10d-a7c6-4744-a5c6-831e2faf24c2","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"BusinessData"}},{"type":"String","alias":"CaseId","label":"Case Id","value":"FIOP115502","@metadata":{"objectID":"b5e092bd-2f5b-4c80-8b30-bc975b0ad31f","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"BusinessData"}},{"type":"String","alias":"CasePriority","label":"Case Priority","value":"High","@metadata":{"objectID":"29a57ba6-daaf-4dce-82e8-2ea1d63d9673","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"BusinessData"}},{"type":"DateTime","alias":"CaseReceiveDate","label":"Case Receive Date","value":"2017-08-17T18:28:44Z","@metadata":{"objectID":"2ec3add9-bf18-44f1-b7d0-1b078fd76eb9","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"BusinessData"}},{"type":"String","alias":"caseRouting","label":"Case Routing","value":"Local Case","@metadata":{"objectID":"a19ca934-82d0-45c8-8260-e18953a68fae","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"BusinessData"}},{"type":"DateTime","alias":"CaseUpdateDate","label":"Case Update Date","value":null,"@metadata":{"objectID":"6e23619b-5b34-44cd-a660-e630cfb5c051","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"BusinessData"}},{"type":"String","alias":"CountryOfOrigin","label":"Country Of Origin","value":"DK","@metadata":{"objectID":"be72c009-aa06-4e88-ac29-7ccb620e557b","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"BusinessData"}},{"type":"String","alias":"CustomerId","label":"Customer Id","value":"6104020018","@metadata":{"objectID":"ab9c5ad8-882e-4c85-a542-a043867cc31b","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"BusinessData"}},{"type":"String","alias":"customerName","label":"Customer Name","value":"Rickard Björklund","@metadata":{"objectID":"34729339-cb00-4816-ab7c-ab6ba05b8145","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"BusinessData"}},{"type":"String","alias":"CustomerRating","label":"Customer Rating","value":"","@metadata":{"objectID":"23beaed0-f890-406f-94c1-a18d7fb62137","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"BusinessData"}},{"type":"String","alias":"flowPhase","label":"Flow Phase","value":"Production","@metadata":{"objectID":"1dafe16a-8fb0-4e6a-bed0-a37b30141590","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"BusinessData"}},{"type":"Boolean","alias":"hasActiveFollowUpTask","label":"Has Active Follow Up Task","value":false,"@metadata":{"objectID":"c658288f-aaca-444a-990d-9be802d7b579","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"BusinessData"}},{"type":"Boolean","alias":"hasRequestMissingInfoTask","label":"Has Request Missing Info Task","value":false,"@metadata":{"objectID":"d58c1dc3-9b6a-421f-a211-a904fd34643c","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"BusinessData"}},{"type":"String","alias":"IndustryCode","label":"Industry Code","value":"021000","@metadata":{"objectID":"2c7413d9-6b4a-4b36-84f9-5fcdbdfae86d","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"BusinessData"}},{"type":"String","alias":"internalCustomerId","label":"Internal Customer Id","value":"8008492523","@metadata":{"objectID":"a13ede48-aec4-4662-a493-43b9b7980c2c","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"BusinessData"}},{"type":"Boolean","alias":"IsFinalized","label":"Is Finalized","value":false,"@metadata":{"objectID":"5f74e963-85c4-42bc-ab19-2010d3bcebc0","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"BusinessData"}},{"type":"DateTime","alias":"SLADate","label":"SLA Date","value":"2017-09-28T18:29:17Z","@metadata":{"objectID":"ae7945bd-7ee6-4a20-bb61-1b69c718d81d","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"BusinessData"}},{"type":"String","alias":"SubmitterName","label":"Submitter Name","value":"Aleksandr Fokin","@metadata":{"objectID":"4343c5c9-b9c0-409c-a2ce-ce78769ef25d","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"BusinessData"}},{"type":"String","alias":"SubmitterRegNo","label":"Submitter Reg No","value":"34KC","@metadata":{"objectID":"baccfe0c-79ba-4678-a0bb-92ff67b3eea7","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"BusinessData"}},{"type":"String","alias":"SubmitterUserId","label":"Submitter User Id","value":"BB6545","@metadata":{"objectID":"070e5f73-f37e-4574-9f5a-f75d638e4fb0","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"BusinessData"}},{"type":"Decimal","alias":"SumOfFacilityAmount","label":"Sum Of Facility Amount","value":0.0,"@metadata":{"objectID":"cb1868dc-e0e9-443c-a057-159ee173ef35","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"BusinessData"}}],"@metadata":{"objectID":"e25087e6-58e3-4b7e-8c86-99d0630440d9","dirty":true,"invalid":false,"shared":false}}},"actions":null}}
 
 Task list - Default Instance Tasks List Service (POST)
 ----
-https://dev-bpm.danskenet.net/rest/bpm/wle/v1/service/1.6a8bf196-6b77-4007-9747-6e649029d783?snapshotId=2064.51981cbe-66b0-43f0-ad26-77b9bc46c1bc&action=start&createTask=false&parts=all&params={"selectedInstanceId":"115502","instanceTasksProperties":{"sortCriteria":{"listAllSelectedIndices":[],"items":["DUEDATE_ASC","ID_ASC"]},"filters":{"listAllSelectedIndices":[],"items":[{"statusFilter":{"listAllSelectedIndices":[],"items":["NEW","RECEIVED"]}}]},"checkActions":{"listAllSelectedIndices":[],"items":["ACTION_VIEW_TASK","ACTION_CLAIM","ACTION_COMPLETE","ACTION_CANCELCLAIM","ACTION_REASSIGNTOUSER","ACTION_REASSIGNTOGROUP","ACTION_UPDATEPRIORITY","ACTION_UPDATEDUEDATE"]}}}
+https://dev-bpm.somecompany.org/rest/bpm/wle/v1/service/1.6a8bf196-6b77-4007-9747-6e649029d783?snapshotId=2064.51981cbe-66b0-43f0-ad26-77b9bc46c1bc&action=start&createTask=false&parts=all&params={"selectedInstanceId":"115502","instanceTasksProperties":{"sortCriteria":{"listAllSelectedIndices":[],"items":["DUEDATE_ASC","ID_ASC"]},"filters":{"listAllSelectedIndices":[],"items":[{"statusFilter":{"listAllSelectedIndices":[],"items":["NEW","RECEIVED"]}}]},"checkActions":{"listAllSelectedIndices":[],"items":["ACTION_VIEW_TASK","ACTION_CLAIM","ACTION_COMPLETE","ACTION_CANCELCLAIM","ACTION_REASSIGNTOUSER","ACTION_REASSIGNTOGROUP","ACTION_UPDATEPRIORITY","ACTION_UPDATEDUEDATE"]}}}
 {"status":"200","data":{"serviceStatus":"end","key":"@97651","step":"End","data":{"instanceTasksData":{"tasks":{"selected":[],"items":[{"id":"704603","subject":"6104020018 - Rickard Björklund - DK / Financing Operations - Manage Documents","priority":30,"isAtRisk":true,"riskState":"Overdue","dueDate":"2017-08-17T19:31:32.100Z","closedDate":"","assignedToUserId":"2048.2604","assignedToUserFullName":"Aleksandr Fokin","assignedToTeamId":"","assignedToTeamName":"","processInstanceId":"115502","processInstanceName":"FIOP Prod: 115502","actions":{"selected":[],"items":["ACTION_UPDATEDUEDATE","ACTION_REASSIGNTOUSER","ACTION_COMPLETE","ACTION_UPDATEPRIORITY","ACTION_VIEW_TASK","ACTION_REASSIGNTOGROUP","ACTION_CANCELCLAIM"],"@metadata":{"objectID":"01b43181-5a1f-4972-b74b-4eb0e741cb1a","dirty":true,"invalid":false,"shared":false}},"@metadata":{"objectID":"a1d41111-8334-4bd8-a8d4-60dcf7d3c145","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"TaskListItem"}},{"id":"704551","subject":"6104020018 - Rickard Björklund - DK / Financing Operations - Review ","priority":20,"isAtRisk":true,"riskState":"Overdue","dueDate":"2017-08-18T18:29:27.300Z","closedDate":"","assignedToUserId":"","assignedToUserFullName":"","assignedToTeamId":"217558","assignedToTeamName":"Case Handler","processInstanceId":"115502","processInstanceName":"FIOP Prod: 115502","actions":{"selected":[],"items":["ACTION_UPDATEDUEDATE","ACTION_REASSIGNTOUSER","ACTION_CLAIM","ACTION_UPDATEPRIORITY","ACTION_VIEW_TASK","ACTION_REASSIGNTOGROUP"],"@metadata":{"objectID":"60017111-a3fa-4b3c-892f-4ff6249c2cb0","dirty":true,"invalid":false,"shared":false}},"@metadata":{"objectID":"7b3574cf-f34d-4a90-bb9a-d0d243fec375","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"TaskListItem"}}],"@metadata":{"objectID":"6b3e1008-ce4f-44fd-810d-832848797ad2","dirty":true,"invalid":false,"shared":false}},"total":2,"@metadata":{"objectID":"fa3228b4-3b1d-4cba-9531-7cf2c2787725","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"InstanceTasksData"}}},"actions":null}}
 
 Start Activity - Default Activity Action Service (POST)
 ----
-https://dev-bpm.danskenet.net/rest/bpm/wle/v1/service/1.0dbfe1e3-525a-4679-8e0c-d1ca8204d4a9?snapshotId=2064.51981cbe-66b0-43f0-ad26-77b9bc46c1bc&action=start&createTask=false&parts=all&params={"activityId":"2118.75fefc9e-9f60-4f1e-9e87-7bb6ebd98f85","checkActions":["ACTION_VIEW_ACTIVITY","ACTION_START_ACTIVITY"],"action":"ACTION_START_ACTIVITY"}
+https://dev-bpm.somecompany.org/rest/bpm/wle/v1/service/1.0dbfe1e3-525a-4679-8e0c-d1ca8204d4a9?snapshotId=2064.51981cbe-66b0-43f0-ad26-77b9bc46c1bc&action=start&createTask=false&parts=all&params={"activityId":"2118.75fefc9e-9f60-4f1e-9e87-7bb6ebd98f85","checkActions":["ACTION_VIEW_ACTIVITY","ACTION_START_ACTIVITY"],"action":"ACTION_START_ACTIVITY"}
 {"status":"200","data":{"serviceStatus":"end","key":"@97945","step":"End","data":{"userIdForAutoflow":"2604","taskIdForAutoflow":"2078.740077","activity":{"id":"2118.75fefc9e-9f60-4f1e-9e87-7bb6ebd98f85","name":"Manage Documents","executionState":"WORKING","activityType":"CALLED_PROCESS","executionType":"MANUAL","optionType":"OPTIONAL","required":true,"repeatable":true,"hidden":false,"startDate":"2017-09-01T18:10:20Z","preconditionType":"NO_PRECONDITION","actions":{"selected":[],"items":["ACTION_VIEW_ACTIVITY"],"@metadata":{"objectID":"ad6544c4-c4d9-47de-8508-35b93ef0fc33","dirty":true,"invalid":false,"shared":false}},"@metadata":{"objectID":"cb3a0329-6cbd-4670-96f2-b42c522e259a","dirty":true,"invalid":false,"shared":false,"rootVersionContextID":"2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c","className":"ActivityDetails"}}},"actions":null}}
 !!!! "taskIdForAutoflow" in the response can be used
 
 Start Activity - REST (PUT) (2118.9dc0301a-8c88-4ab6-aa36-d19ba95c7a1b)
 ----
-https://dev-bpm.danskenet.net/rest/bpm/wle/v1/activity/2118.3f99843b-aea0-44b6-b1de-9324e86d1ff1?action=ACTION_START_ACTIVITY
+https://dev-bpm.somecompany.org/rest/bpm/wle/v1/activity/2118.3f99843b-aea0-44b6-b1de-9324e86d1ff1?action=ACTION_START_ACTIVITY
 
 Get current user data:
-https://dev-bpm.danskenet.net/rest/bpm/wle/v1/user
+https://dev-bpm.somecompany.org/rest/bpm/wle/v1/user
