@@ -4,7 +4,7 @@ const Preloader = () => {
 
   return (
     <div className="preloader">
-      <img className="preloader__image" src={require('./images/ajax_birdie.gif')} />
+      <img className="preloader__image" src={require('./spinner-blue.gif')} />
     </div>
   );
 };

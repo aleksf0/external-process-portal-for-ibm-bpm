@@ -13,23 +13,27 @@ const Task = ({ task, handleViewInstanceSelection }) => {
       <div className="panel-body">
         <Container fluid={true}>
           <Row>
-            <Col md={9}>
-              <img className={resolveStatusIconClass(!!task.closedDate, task.isAtRisk, task.dueDate)} />
-              <a className="task__subject-link" href={`${globalVars.config.api.environmentUrl}/teamworks/process.lsw?zWorkflowState=1&zTaskId=${task.id}&zResetContext=true`} target="_blank">{task.subject}</a>
-              {handleViewInstanceSelection &&
-                <span>
-                  <DropdownButton id={task.id} bsSize="xsmall" title="" onSelect={handleViewInstanceSelection}>
-                    <MenuItem eventKey={task.processInstanceId}>View Instance</MenuItem>
-                  </DropdownButton>
-                  <p className="task__process-instance-name">{task.processInstanceName}</p>
-                </span>
-              }
+            <Col md={9} className="task__name-column">
+              <div className="task__image-container">
+                <img className={resolveStatusIconClass(!!task.closedDate, task.isAtRisk, task.dueDate)} />
+              </div>
+              <div className="task__subject-container">
+                <a className="task__subject-link" href={`${globalVars.config.api.environmentUrl}/teamworks/process.lsw?zWorkflowState=1&zTaskId=${task.id}&zResetContext=true`} target="_blank">{task.subject}</a>
+                {handleViewInstanceSelection &&
+                  <span>
+                    <DropdownButton id={task.id} bsSize="xsmall" title="" onSelect={handleViewInstanceSelection}>
+                      <MenuItem eventKey={task.processInstanceId}>View Instance</MenuItem>
+                    </DropdownButton>
+                    <div className="task__process-instance-name">{task.processInstanceName}</div>
+                  </span>
+                }
+              </div>
             </Col>
-            <Col md={3} className="task__details-container">
+            <Col md={3} className="task__details-column">
               <div className="task__date-actor-container">
                 <span className="task__date-prefix">{taskDetails.date.prefix}</span>
                 <Moment format="LLL">{taskDetails.date.value}</Moment>
-                <div>
+                <div className="task__actor-container">
                   {task.assignedToTeamName && <img className="task__actor-icon" />}
                   <span className="task__actor">{taskDetails.actor}</span>
                 </div>

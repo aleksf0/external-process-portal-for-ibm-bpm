@@ -1,11 +1,10 @@
-$image-sprite-path: '../../../../images/portal_sprite_2.png';
-
-@mixin tab-icon($sprite, $left, $top) {
+@mixin tab-icon($image) {
   height: 20px;
   width: 20px;
   padding-left: 20px;
   margin-right: 5px;
-  background: url($sprite) $left $top no-repeat;
+  background: url($image) 0 0 no-repeat;
+  background-size: 20px;
 }
 
 .bpm-portal-page-header {
@@ -28,10 +27,10 @@ $image-sprite-path: '../../../../images/portal_sprite_2.png';
 
   @at-root #{&}__icon {
     @at-root #{&}--tasks {
-      @include tab-icon($image-sprite-path, -100px, 3px);
+      @include tab-icon('tab-tasks.png');
     }
     @at-root #{&}--process-instances {
-      @include tab-icon($image-sprite-path, -100px, -37px);
+      @include tab-icon('tab-process-instances.png');
     }
   }
 

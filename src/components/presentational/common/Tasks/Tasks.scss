@@ -1,19 +1,22 @@
-$image-sprite-path: '../../../../images/portal_sprite.png';
+$image-sprite-path: 'task-status-sprites.png';
+$image-flag-path: 'flag-white.png';
 
 @mixin task-status-icon($sprite, $left, $top) {
-  width: 30px;
-  height: 30px;
-  padding-right: 30px;
-  margin-right: 5px;
-  background: url($sprite) $left $top;
+  width: 48px;
+  height: 48px;
+  padding-right: 48px;
+  margin-right: 10px;
+  background: url($sprite) $left/2 $top/2;
+  background-size: 192px;
 }
 
-@mixin task-priority-icon($sprite, $left, $top) {
+@mixin task-priority-icon($color) {
   width: 12px;
   height: 50px;
-  padding-right: 10px;
-  float: right;
-  background: url($sprite) $left $top;
+  padding-right: 12px;
+  background: url($image-flag-path) 1px 16px no-repeat;
+  background-size: 12px;
+  background-color: $color;
 }
 
 .task {
@@ -22,12 +25,39 @@ $image-sprite-path: '../../../../images/portal_sprite.png';
     padding: 0px 0px 0px 5px;
     background: linear-gradient(to bottom right, #DADEE4, #F6F7F9);
     @at-root #{&}:hover {
-      background: linear-gradient(to bottom right, #DADEFF, #F6F7F9);
+      background: linear-gradient(to bottom right, #BCCBE0, #F6F7F9);
     }
   }
 
   @at-root #{&} .btn-group {
     margin-left: 10px;
+  }
+
+  @at-root #{&}__name-column {
+    padding: 0px 0px 0px 0px !important; /* The Bootstrap Col element has padding defined inline, therefore !important is the only option to override it. */
+  }
+
+  @at-root #{&}__image-container {
+    float: left;
+  }
+
+  @at-root #{&}__status-icon {
+    @at-root #{&}--on-track {
+      @include task-status-icon($image-sprite-path, 0, 0);
+    }
+    @at-root #{&}--at-risk {
+      @include task-status-icon($image-sprite-path, -96px, 0);
+    }
+    @at-root #{&}--overdue {
+      @include task-status-icon($image-sprite-path, -192px, 0);
+    }
+    @at-root #{&}--completed {
+      @include task-status-icon($image-sprite-path, -288px, 0);
+    }
+  }
+
+  @at-root #{&}__subject-container {
+    padding-top: 5px;
   }
 
   @at-root #{&}__subject-link {
@@ -39,21 +69,18 @@ $image-sprite-path: '../../../../images/portal_sprite.png';
   @at-root #{&}__process-instance-name {
     font-size: 10px;
     font-style: italic;
-    padding-left: 35px;
   }
 
-  @at-root #{&}__details-container {
+  @at-root #{&}__details-column {
     font-size: 10px;
     text-align: right;
     padding: 0px 0px 0px 0px !important; /* The Bootstrap Col element has padding defined inline, therefore !important is the only option to override it. */
   }
+
   @at-root #{&}__date-actor-container {
     float: left;
-    width: 93%;
+    width: 94%;
     padding-top: 10px;
-  }
-  @at-root #{&}__priority-container {
-    float: right;
   }
 
   @at-root #{&}__date-prefix {
@@ -62,45 +89,38 @@ $image-sprite-path: '../../../../images/portal_sprite.png';
 
   @at-root #{&}__actor {
     font-style: italic;
+    @at-root #{&}-container {
+      padding-top: 5px;
+    }
     @at-root #{&}-icon {
       height: 16px;
       width: 0px;
       padding-left: 16px;
       padding-right: 5px;
-      background: url($image-sprite-path) -60px -90px no-repeat;
+      background: url('assignee-team-blue.png') 0 0 no-repeat;
+      background-size: 16px;
     }
   }
 
-  @at-root #{&}__status-icon {
-    @at-root #{&}--overdue {
-      @include task-status-icon($image-sprite-path, 0px, -60px);
-    }
-    @at-root #{&}--at-risk {
-      @include task-status-icon($image-sprite-path, -30px, -60px);
-    }
-    @at-root #{&}--on-track {
-      @include task-status-icon('../../../../images/task_state.png', -4px, -68px);
-    }
-    @at-root #{&}--completed {
-      @include task-status-icon($image-sprite-path, -60px, -60px);
-    }
+  @at-root #{&}__priority-container {
+    float: right;
   }
 
   @at-root #{&}__priority-icon {
     @at-root #{&}--highest {
-      @include task-priority-icon($image-sprite-path, 0px, 0px);
+      @include task-priority-icon(#FF3D00);
     }
     @at-root #{&}--high {
-      @include task-priority-icon($image-sprite-path, -14px, 0px);
+      @include task-priority-icon(#FFC107);
     }
     @at-root #{&}--normal {
-      @include task-priority-icon($image-sprite-path, -28px, 0px);
+      @include task-priority-icon(#EDEDED);
     }
     @at-root #{&}--low {
-      @include task-priority-icon($image-sprite-path, -42px, 0px);
+      @include task-priority-icon(#27729F);
     }
     @at-root #{&}--lowest {
-      @include task-priority-icon($image-sprite-path, -56px, 0px);
+      @include task-priority-icon(#CCCCCC);
     }
   }
 }

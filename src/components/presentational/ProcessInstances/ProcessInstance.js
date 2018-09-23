@@ -12,14 +12,18 @@ const ProcessInstance = ({ processInstance, handlePickedProcessInstance, inProgr
       <Container fluid={true} className="panel-body">
         <Row>
           <Col md={10}>
-            <img className={resolveStatusIconClass(processInstance.riskState, processInstance.status)} />
-            <a className={'process-instance__link ' + (inProgress ? 'process-instance__link--disabled' : 'process-instance__link--enabled')}
-              onClick={(event) => { handlePickedProcessInstance(processInstance.id.split('.').pop(), event); }}>
-              {processInstance.name}
-            </a>
-            <div className="process-instance__created-date-container">
-              <span className="process-instance__created-date-prefix">Created: </span>
-              <Moment format="LLL">{processInstance.creationDate}</Moment>
+            <div className="process-instance__image-container">
+              <img className={resolveStatusIconClass(processInstance.riskState, processInstance.status)} />
+            </div>
+            <div className="process-instance__name-container">
+              <a className={'process-instance__link ' + (inProgress ? 'process-instance__link--disabled' : 'process-instance__link--enabled')}
+                onClick={(event) => { handlePickedProcessInstance(processInstance.id.split('.').pop(), event); }}>
+                {processInstance.name}
+              </a>
+              <div className="process-instance__created-date-container">
+                <span className="process-instance__created-date-prefix">Created: </span>
+                <Moment format="LLL">{processInstance.creationDate}</Moment>
+              </div>
             </div>
           </Col>
           <Col md={2}>

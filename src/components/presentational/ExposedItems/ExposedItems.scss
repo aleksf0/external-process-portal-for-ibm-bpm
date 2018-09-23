@@ -1,4 +1,10 @@
-$image-sprite-path: '../../../images/portal_sprite.png';
+@mixin item-icon($image) {
+  height: 14px;
+  width: 0px;
+  padding-left: 14px;
+  background: url($image) 0px 0px no-repeat;
+  background-size: 14px;
+}
 
 .exposed-item {
 
@@ -22,18 +28,10 @@ $image-sprite-path: '../../../images/portal_sprite.png';
 
   @at-root #{&}__icon {
     @at-root #{&}--service {
-      height: 20px;
-      width: 0px;
-      padding-left: 20px;
-      background: url($image-sprite-path) -330px -90px no-repeat;
+      @include item-icon('exposed-item-service.png');
     }
     @at-root #{&}--process {
-      margin-top: 3px;
-      margin-bottom: 3px;
-      height: 14px;
-      width: 0px;
-      padding-left: 20px;
-      background: url($image-sprite-path) -344px -288px no-repeat;
+      @include item-icon('exposed-item-process.png');
     }
   }
 }
