@@ -1,5 +1,5 @@
 {
   "api": {
-    "environmentUrl": "https://test-bpm.somecompany.org"
+    "environmentUrl": "http://test-bpm.somecompany.org"
   }
 }

@@ -1,19 +1,26 @@
 {
   "api": {
-    "environmentUrl": "https://dev-bpm.somecompany.org",
-    "certPath": "ssl/SomeCompany/SomeCompanyInternalRootCaHw.cer",
+    "environmentUrl": "http://dev-bpm.somecompany.org",
+    //Absolute or relative path to trusted CA cert if api.environmentUrl uses SSL
+    //"certPath": "ssl/SomeCompany/SomeCompanyRootCa.cer",
     "toolkits": {
       "dashboards": {
-        "snapshotId": "2064.95c9fb3c-e4a2-48af-91df-dbcda7a90a17",
+        //v8.5.5.0
+        //"snapshotId": "2064.72110a50-c144-4172-be6c-35082f760c5f",
+        //v8.5.6.0
+        //"snapshotId": "2064.21f2cf48-ecc5-11e3-8528-82687f4fc15c",
+        //v8.6.0.0
+        "snapshotId": "2064.f0619268-2845-4d81-bac9-8a918c3172f7",
         "serviceIds": {
-          "instanceSearch": "1.5d7ad0de-b56d-4d07-a2c4-b58584b42eeb",
-          "instanceBusinessData": "1.ce647fdf-0152-43c4-9564-a397bcebd8c4",
-          "instanceTasks": "1.6a8bf196-6b77-4007-9747-6e649029d783",
-          "instanceActivities" : "1.9de05466-2359-495e-8a6a-1ce4493bc92e"
+          "instanceSearch": "SYSD@Default Instance List Service",
+          "instanceBusinessData": "SYSD@Default Data Service",
+          "instanceTasks": "SYSD@Default Instance Tasks List Service",
+          "instanceActivities" : "SYSD@Default Instance Activities List Service"
         }
       }
     }
   },
+  //'basic' or 'kerberos'
   "authentication": "kerberos",
   "dateTimeFormat": "YYYY-MM-DD HH:mm:ss"
 }

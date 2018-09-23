@@ -37,10 +37,12 @@ let middleware = [
 
 if (config.get('authentication') === 'basic') { // setting proxy server to bypass CORS
 
-  let certPath = config.get('api.certPath');
   let proxyOptions = url.parse(config.get('api.environmentUrl'));
   proxyOptions.route = '/bpm-rest'; // requests to /bpm-rest/x/y/z are proxied to https://dev-bpm.somecompany.org/x/y/z
-  proxyOptions.ca = [fs.readFileSync(/^([A-z]:|\/)/.test(certPath) ? certPath : process.env.PWD + path.sep + certPath, { encoding: 'utf-8' })];
+  if (config.has('api.certPath') && config.get('api.certPath')) {
+    let certPath = config.get('api.certPath');
+    proxyOptions.ca = [fs.readFileSync(/^([A-z]:|\/)/.test(certPath) ? certPath : process.env.PWD + path.sep + certPath, { encoding: 'utf-8' })];
+  }
   proxyOptions.suppressHttpAuthPopup = true;
   proxyOptions.headers = { 'accept': '*/*' };
 
